@@ -1,18 +1,19 @@
 (eval-after-load 'twittering-mode
   '(progn
-     (define-key twittering-mode-map (kbd "g") nil)
-     (define-key twittering-mode-map (kbd "g g") 'twittering-goto-first-status)
-     (define-key twittering-mode-map (kbd "c") 'twittering-current-timeline)
-     (define-key twittering-mode-map (kbd "C-d") 'twittering-scroll-up)
-     (define-key twittering-mode-map (kbd "C-u") 'twittering-scroll-down)
-     (define-key twittering-mode-map (kbd "/") 'evil-search-forward)
-     (define-key twittering-mode-map (kbd "?") 'evil-search-backward)
-     (define-key twittering-mode-map (kbd "n") 'evil-search-next)
-     (define-key twittering-mode-map (kbd "N") 'evil-search-previous)
-     (define-key twittering-edit-mode-map [escape] 'twittering-edit-cancel-status)
-     (define-key twittering-mode-map (kbd "<tab>") 'twittering-goto-next-uri)
-     ;; make evil leader key work in twittering-mode
-     (add-to-list 'evil-leader/no-prefix-mode-rx "twittering-mode")
+     (evilified-state-evilify-map twittering-mode-map
+       :mode twittering-mode
+       :bindings
+       "g" nil
+       "g g" 'twittering-goto-first-status
+       "c" 'twittering-current-timeline
+       "C-u" 'twittering-scroll-down
+       "/" 'evil-search-forward
+       "?" 'evil-search-backward
+       "n" 'evil-search-next
+       "N" 'evil-serach-previous
+       [escape] 'twittering-edit-cancel-status
+       "<tab>" 'twittering-goto-next-uri)
+
      ;; display icons 
      (setq twittering-icon-mode t)
      ;; the default size is 48 which I find too large
